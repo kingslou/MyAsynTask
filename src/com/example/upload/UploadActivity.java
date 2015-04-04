@@ -1,6 +1,7 @@
 package com.example.upload;
 import java.io.File;
 import java.io.IOException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -10,6 +11,10 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+
+import com.example.myasyntask.R;
+import com.example.upload.AndroidMultiPartEntity.ProgressListener;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -31,7 +36,7 @@ import android.widget.VideoView;
 
 public class UploadActivity extends Activity {
 	// LogCat tag
-	private static final String TAG = MainActivity.class.getSimpleName();
+	private static final String TAG = SelectActivity.class.getSimpleName();
 
 	private ProgressBar progressBar;
 	private String filePath = null;
@@ -52,9 +57,9 @@ public class UploadActivity extends Activity {
 		vidPreview = (VideoView) findViewById(R.id.videoPreview);
 
 		// Changing action bar background color
-		getActionBar().setBackgroundDrawable(
-				new ColorDrawable(Color.parseColor(getResources().getString(
-						R.color.action_bar))));
+//		getActionBar().setBackgroundDrawable(
+//				new ColorDrawable(Color.parseColor(getResources().getString(
+//						R.color.action_bar))));
 
 		// Receiving the data from previous activity
 		Intent i = getIntent();
