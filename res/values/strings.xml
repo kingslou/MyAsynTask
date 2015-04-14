@@ -3,6 +3,7 @@
 
     <string name="app_name">Camera File Upload</string>
     <string name="btnTakePicture">Capture Image</string>
+    <string name="btnTakePhoto">PhotoImage</string>
     <string name="btnRecordVideo">Record Video</string>
     <string name="or">(or)</string>
     <string name="btnUploadToServer">Upload to Server</string>

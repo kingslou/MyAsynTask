@@ -3,9 +3,12 @@ package com.example.upload;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import com.example.myasyntask.R;
+import com.photoselector.model.PhotoModel;
+import com.photoselector.ui.PhotoSelectorActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,7 +39,7 @@ public class SelectActivity extends Activity {
  
     private Uri fileUri; // file url to store image/video
     
-    private Button btnCapturePicture, btnRecordVideo;
+    private Button btnCapturePicture, btnRecordVideo,btnFromPhoto;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class SelectActivity extends Activity {
  
         btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
         btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
+        btnFromPhoto = (Button)findViewById(R.id.btnCapturefromphoto);
  
         /**
          * Capture image button click event
@@ -61,6 +65,18 @@ public class SelectActivity extends Activity {
                 captureImage();
             }
         });
+        
+        btnFromPhoto.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(SelectActivity.this, PhotoSelectorActivity.class);
+			    intent.putExtra(PhotoSelectorActivity.KEY_MAX, 5);
+			    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			    startActivityForResult(intent, 20);
+			}
+		});
  
         /**
          * Record video button click event
@@ -200,6 +216,22 @@ public class SelectActivity extends Activity {
                 Toast.makeText(getApplicationContext(),
                         "Sorry! Failed to record video", Toast.LENGTH_SHORT)
                         .show();
+            }
+        }else if (requestCode == 20) {// selected image
+            if (data != null && data.getExtras() != null) {
+                @SuppressWarnings("unchecked")
+                List<PhotoModel> photos = (List<PhotoModel>) data.getExtras().getSerializable("photos");
+                if (photos == null || photos.isEmpty()) {
+//                    UIHelper.ToastMessage(this, R.string.no_photo_selected);
+                } else {
+//                    Intent intent = new Intent(this, YourOwnLogic.class);
+//                    Bundle b = new Bundle();
+//                    b.putSerializable("album_pojo", albumPojo);
+//                    b.putSerializable("photos", (Serializable) photos);
+//                    intent.putExtras(b);
+//                    startActivity(intent);
+//                    finish();
+                }
             }
         }
     }
